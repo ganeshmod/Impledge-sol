@@ -1,89 +1,59 @@
-# Longest Compound Words
+# ReadMe: Longest Compound Words Finder
 
-**Impledge Technologies Interview Coding Test 2025**
+## Overview
+This program is designed to identify the longest and second-longest compound words in a given file. A compound word is defined as a word that can be formed entirely from concatenating other words present in the file. The solution uses a **Trie** data structure for efficient prefix searching and compound word validation.
 
-This repository contains a solution to the Longest Compound Words problem, implemented in Java. The problem statement can be found in the `Exercise_Fresher_Word_Problem.pdf` file.
+### Key Design Decisions
+1. **Trie Data Structure**: The program uses a Trie to store all the words, enabling efficient prefix matching and word validation.
+2. **Queue-Based Processing**: A queue is used to iteratively check potential compound words and their remaining suffixes.
+3. **Efficient File Processing**: Words are read line by line from the input file, avoiding high memory usage for large files.
 
-## Code Execution Procedure
+### Approach
+1. **Build the Trie**: Read words from the input file and insert them into the Trie. For each word, check if any prefixes exist in the Trie and enqueue the remaining suffix for further processing.
+2. **Identify Compound Words**: Process the queue to find compound words by checking if their suffixes are valid words in the Trie. Track the longest and second-longest compound words.
 
-### Prerequisites
-- Java Development Kit (JDK) version 8 or newer must be installed.
+## Steps to Execute
 
-### Steps to Execute
-1. Clone or download the repository to your local machine.
-2. Navigate to the directory containing the `Solution.java` file.
-3. Replace the file path in the `buildTrie()` method call (in the `main` method) with the relative or absolute path of the input text file.
-4. Compile the program:
+1. **Setup**:
+   - Ensure Java is installed on your machine.
+   - Place the input file (e.g., `Input_02.txt`) in the same directory as the program or provide its full path.
+
+2. **Compile the Code**:
    ```
    javac Solution.java
    ```
-5. Run the program:
+
+3. **Run the Program**:
    ```
    java Solution
    ```
 
-### Input Format
-- The input file should contain one word per line, sorted alphabetically.
+4. **Output**:
+   - The program will display the longest and second-longest compound words along with the time taken for execution.
 
-### Output
-- The program outputs:
-  - The longest compound word.
-  - The second-longest compound word.
-  - The time taken to find the results.
+### Input File Format
+- The input file should contain one word per line.
+- Example:
+  ```
+  cat
+  cats
+  catsdogcats
+  dog
+  dogs
+  dogcatsdog
+  ```
 
-## Problem Description
-
-Compound words are words formed by combining one or more valid words from the input file. Some key properties:
-- The input file is sorted alphabetically.
-- Compound words are constructed using words that appear earlier in the file (prefix and suffix).
-- Words containing characters not part of any valid word in the file cannot be compound words.
-
-## Approach and Algorithm
-
-The solution uses a Trie-based approach, which is efficient and widely adopted for this class of problems. The steps are as follows:
-
-1. **Build the Trie:**
-   - Read words from the input file and insert them into the Trie.
-   - Simultaneously, identify and enqueue `<word, suffix>` pairs, where the word can be divided into a prefix (already in the Trie) and a suffix.
-
-2. **Initialize Variables:**
-   - Track the longest and second-longest compound words, as well as the maximum length encountered.
-
-3. **Process the Queue:**
-   - While the queue is not empty, dequeue a `<word, suffix>` pair.
-   - Check if the suffix is a valid word in the Trie:
-     - If valid and the word's length exceeds the current maximum length, update the longest and second-longest compound words.
-     - Otherwise, find prefixes of the suffix, compute new suffixes, and enqueue new `<word, suffix>` pairs.
-
-4. **Output Results:**
-   - Return the longest, second-longest compound words and the Time Taken.
-
-## Example
-
-Given the following input file:
+### Example Output
 ```
-ant
-antman
-bat
-batman
-man
-super
-superman
+Longest Compound Word: catsdogcats
+Second Longest Compound Word: dogcatsdog
+Time taken: 0.012 seconds
 ```
 
-The output will be:
-```
-Longest Compound Word: superman
-Second Longest Compound Word: batman
-Time taken: 0.005 seconds
-```
+## Dependencies
+- No external libraries are required. The program uses Java's standard libraries for file handling and data structures.
 
-## File Structure
-- `Solution.java`: Main Java implementation of the solution.
-- `Input_01.txt`: Example input file.
-- `Input_02.txt`: Example input file.
-- `trie.java`: Trie implemation for the use
-
-## License
-This repository is licensed under the MIT License.
+## Notes
+- If the file path is incorrect or the file cannot be read, the program will terminate with an error message.
+- Ensure the input file does not contain invalid characters or empty lines.
 
